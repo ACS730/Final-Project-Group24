@@ -19,7 +19,7 @@ variable "default_tags" {
 
 # Variable to signal the current environment 
 variable "env" {
-  default     = "dev"
+  default     = "staging"
   type        = string
   description = "Deployment Environment"
 }
@@ -27,24 +27,24 @@ variable "env" {
 # Prefix to identify resources
 variable "prefix" {
   type    = string
-  default = "acs-final-project"
+  default = "acs_final_project"
 }
 
 variable "ec2_count" {
   type    = number
-  default = "0"
+  default = "2"
 }
 
 # curl http://169.254.169.254/latest/meta-data/public-ipv4
 variable "my_public_ip" {
   type        = string
-  default     = "3.234.221.110"
+  default     = "18.208.149.217"
   description = "Public IP of my Cloud 9 station to be opened in bastion ingress"
 }
 
 variable "my_private_ip" {
   type        = string
-  default     = "172.31.65.201"
+  default     = "172.31.86.50"
   description = "Private IP of my Cloud 9 station to be opened in bastion ingress"
 }
 
