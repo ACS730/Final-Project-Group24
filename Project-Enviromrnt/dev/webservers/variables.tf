@@ -9,6 +9,14 @@ variable "instance_type" {
   type        = map(string)
 }
 
+# Default tags
+variable "default_tags" {
+  default = {
+    "Owner" = "Group_24"
+    "App"   = "Web"
+  }
+}
+
 # Variable to signal the current environment 
 variable "env" {
   default     = "dev"
@@ -24,19 +32,19 @@ variable "prefix" {
 
 variable "ec2_count" {
   type    = number
-  default = "2"
+  default = "0"
 }
 
 # curl http://169.254.169.254/latest/meta-data/public-ipv4
 variable "my_public_ip" {
   type        = string
-  default     = "18.208.149.217"
+  default     = "3.234.221.110"
   description = "Public IP of my Cloud 9 station to be opened in bastion ingress"
 }
 
 variable "my_private_ip" {
   type        = string
-  default     = "172.31.86.50"
+  default     = "172.31.65.201"
   description = "Private IP of my Cloud 9 station to be opened in bastion ingress"
 }
 

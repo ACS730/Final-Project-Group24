@@ -26,7 +26,7 @@ data "aws_ami" "latest_amazon_linux" {
 data "terraform_remote_state" "network" { // This is to use Outputs from Remote State
   backend = "s3"
   config = {
-    bucket = "${var.env}-acs730-final-project"      // Bucket from where to GET Terraform State
+    bucket = "${var.env}-acs730-final-project1"     // Bucket from where to GET Terraform State
     key    = "${var.env}-network/terraform.tfstate" // Object name in the bucket to GET Terraform State
     region = "us-east-1"                            // Region where bucket created
   }
@@ -196,4 +196,67 @@ resource "aws_security_group" "bastion_sg" {
       "Name" = "${local.name_prefix}-bastion-sg"
     }
   )
+}
+
+# Application Load Balancer Deployment
+module "alb" {
+  source          = "../../../modules/alb"
+  env             = var.env
+  vpc_id          = data.terraform_remote_state.network.outputs.vpc_id
+  security_groups = [aws_security_group.lb_sg.id]
+  subnets         = data.terraform_remote_state.network.outputs.public_subnet_ids[*]
+  prefix          = var.prefix
+  default_tags    = var.default_tags
+}
+
+resource "aws_security_group" "lb_sg" {
+  name        = "allow_http_lb"
+  description = "Allow HTTP inbound traffic"
+  vpc_id      = data.terraform_remote_state.network.outputs.vpc_id
+
+  ingress {
+    description      = "HTTP from everywhere"
+    from_port        = 80
+    to_port          = 80
+    protocol         = "tcp"
+    cidr_blocks      = ["0.0.0.0/0"]
+    ipv6_cidr_blocks = ["::/0"]
+  }
+  ingress {
+    description      = "HTTP from everywhere"
+    from_port        = 8080
+    to_port          = 8080
+    protocol         = "tcp"
+    cidr_blocks      = ["0.0.0.0/0"]
+    ipv6_cidr_blocks = ["::/0"]
+  }
+
+  egress {
+    from_port        = 0
+    to_port          = 0
+    protocol         = "-1"
+    cidr_blocks      = ["0.0.0.0/0"]
+    ipv6_cidr_blocks = ["::/0"]
+  }
+
+  tags = merge(local.default_tags,
+    {
+      "Name" = "${local.name_prefix}-alb-sg"
+    }
+  )
+}
+
+# Auto Scaling Group  Deployment
+
+module "asg" {
+  source              = "../../../modules/asg"
+  default_tags        = var.default_tags
+  env                 = var.env
+  instance_type       = var.instance_type
+  public_key          = aws_key_pair.web_key.key_name
+  prefix              = var.prefix
+  security_groups     = [aws_security_group.web_sg.id]
+  vpc_id              = data.terraform_remote_state.network.outputs.vpc_id
+  lb_target_group_arn = module.alb.target_group_arns[0]
+  vpc_zone_identifier = data.terraform_remote_state.network.outputs.private_subnet_ids[*]
 }
