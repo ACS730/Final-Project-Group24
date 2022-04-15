@@ -17,30 +17,25 @@ locals {
   name_prefix = "${var.prefix}-${var.env}"
 }
 
+# create load balancer
 resource "aws_lb" "alb" {
-  name               = "alb-${var.env}"
+  name               = "${local.name_prefix}Alb"
   internal           = false
   ip_address_type    = "ipv4"
   load_balancer_type = "application"
   security_groups    = var.security_groups
   subnets            = var.subnets
 
-  #enable_deletion_protection = true
 
-  # access_logs {
-  #   bucket  = aws_s3_bucket.lb_logs.bucket
-  #   prefix  = "test-lb"
-  #   enabled = true
-  # }
 
   tags = merge(local.default_tags,
     {
-      "Name" = "${local.name_prefix}-ALB"
+      "Name" = "${local.name_prefix}ALB"
     }
   )
 }
 
-
+# create http listner
 resource "aws_lb_listener" "alb_listener" {
   load_balancer_arn = aws_lb.alb.arn
   port              = "80"
@@ -51,6 +46,7 @@ resource "aws_lb_listener" "alb_listener" {
   }
 }
 
+# create target group
 resource "aws_lb_target_group" "target_group" {
   health_check {
     interval            = 10
@@ -60,16 +56,10 @@ resource "aws_lb_target_group" "target_group" {
     healthy_threshold   = 5
     unhealthy_threshold = 2
   }
-  name        = "target-grp-alb-${var.env}"
+  name        = "${local.name_prefix}AlbTargetGrp"
   port        = 80
   protocol    = "HTTP"
   target_type = "instance"
   vpc_id      = var.vpc_id
 }
 
-# resource "aws_lb_target_group_attachment" "ec2_attach" {
-#   count            = length(aws_instance.webserver)
-#   target_group_arn = aws_lb_target_group.target_group.arn
-#   target_id        = aws_instance.webserver[count.index].id
-#   port             = 80
-# }

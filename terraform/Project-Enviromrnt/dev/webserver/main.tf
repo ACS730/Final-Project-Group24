@@ -17,8 +17,8 @@ data "aws_ami" "latest_amazon_linux" {
 data "terraform_remote_state" "network" { // This is to use Outputs from Remote State
   backend = "s3"
   config = {
-    bucket = "${var.env}-acs730-final-project"      // Bucket from where to GET Terraform State
-    key    = "${var.env}/network/terraform.tfstate" // Object name in the bucket to GET Terraform State
+    bucket = "dev-acs730-final-project"      // Bucket from where to GET Terraform State
+    key    = "dev/network/terraform.tfstate" // Object name in the bucket to GET Terraform State
     region = "us-east-1"                     // Region where bucket created
   }
 }
@@ -34,7 +34,7 @@ locals {
   default_tags = merge(module.globalvars.default_tags, { "env" = var.env })
   prefix       = module.globalvars.prefix
   name_prefix  = "${local.prefix}-${var.env}"
-  key          = "web_key"
+  key          = "${var.env}-key"
 }
 
 # Retrieve global variables from the Terraform module
@@ -97,7 +97,7 @@ resource "aws_volume_attachment" "ebs_att" {
 # Adding SSH key to Amazon EC2
 resource "aws_key_pair" "web_key" {
   key_name   = local.key
-  public_key = file("web_key.pub")
+  public_key = file("${var.env}-key.pub")
 }
 
 
@@ -139,7 +139,7 @@ resource "aws_security_group" "webserver_sg" {
 
   tags = merge(local.default_tags,
     {
-      "Name" = "${local.name_prefix}-webserver-sg"
+      "Name" = "${local.name_prefix}WebserverSg"
     }
   )
 }
@@ -163,7 +163,7 @@ resource "aws_instance" "bastion" {
 
   tags = merge(local.default_tags,
     {
-      "Name" = "${local.name_prefix}-bastion"
+      "Name" = "${local.name_prefix}Bastion"
     }
   )
 }
@@ -241,7 +241,7 @@ resource "aws_security_group" "lb_sg" {
 
   tags = merge(local.default_tags,
     {
-      "Name" = "${local.name_prefix}LbSg"
+      "Name" = "${local.name_prefix}AlbSg"
     }
   )
 }

@@ -1,9 +1,9 @@
 # Instance type
 variable "instance_type" {
   default = {
-    "prod"    = "t3.medium"
-    "staging" = "t3.small"
-    "dev"     = "t3.micro"
+    "Prod"    = "t3.medium"
+    "Staging" = "t3.small"
+    "Dev"     = "t3.micro"
   }
   description = "Type of the instance"
   type        = map(string)
@@ -12,7 +12,7 @@ variable "instance_type" {
 # Default tags
 variable "default_tags" {
   default = {
-    "Owner" = "Group-24"
+    "Owner" = "Group24"
     "App"   = "Web"
   }
 }
@@ -26,7 +26,7 @@ variable "prefix" {
 
 # Variable to signal the current environment 
 variable "env" {
-  default     = "dev"
+  default     = "Dev"
   type        = string
   description = "Deployment Environment"
 }

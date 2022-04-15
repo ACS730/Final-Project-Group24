@@ -17,8 +17,8 @@ data "aws_ami" "latest_amazon_linux" {
 data "terraform_remote_state" "network" { // This is to use Outputs from Remote State
   backend = "s3"
   config = {
-    bucket = "${var.env}-acs730-final-project"      // Bucket from where to GET Terraform State
-    key    = "${var.env}/network/terraform.tfstate" // Object name in the bucket to GET Terraform State
+    bucket = "staging-acs730-final-project"      // Bucket from where to GET Terraform State
+    key    = "staging/network/terraform.tfstate" // Object name in the bucket to GET Terraform State
     region = "us-east-1"                     // Region where bucket created
   }
 }
@@ -191,7 +191,7 @@ resource "aws_security_group" "bastion_sg" {
 
   tags = merge(local.default_tags,
     {
-      "Name" = "${local.name_prefix}-bastion-sg"
+      "Name" = "${local.name_prefix}BastionSg"
     }
   )
 }

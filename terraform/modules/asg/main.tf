@@ -28,9 +28,9 @@ locals {
   name_prefix = "${var.prefix}-${var.env}"
 }
 
-# Create AWS Launch Configuration
+# Webserver Launch Configuration
 resource "aws_launch_configuration" "web" {
-  name            = "webserver-tamplate-${var.env}"
+  name            = "${var.prefix}-${var.env}WebserverTemplate"
   image_id        = data.aws_ami.latest_amazon_linux.id
   instance_type   = lookup(var.instance_type, var.env)
   key_name        = var.public_key
@@ -43,9 +43,9 @@ resource "aws_launch_configuration" "web" {
   )
 }
 
-# Create ASG for Webserver
+# ASG for Webserver
 resource "aws_autoscaling_group" "web_asg" {
-  name                 = "webserver_asg-${var.env}"
+  name                 = "${local.name_prefix}WebserverAsg"
   min_size             = 1
   max_size             = 4
   desired_capacity     = var.desired_size
@@ -57,7 +57,7 @@ resource "aws_autoscaling_group" "web_asg" {
 
   tag {
     key                 = "Name"
-    value               = "${local.name_prefix}-auto-scaled-node"
+    value               = "${local.name_prefix}AutoScaledWebserver"
     propagate_at_launch = true
   }
 }
@@ -70,18 +70,18 @@ resource "aws_autoscaling_attachment" "web_asg_attachment" {
 
 # Create auto-scaling policy for scaling in
 resource "aws_autoscaling_policy" "scale_in" {
-  name                   = "webserver-scale-in"
+  name                   = "${local.name_prefix}WebserverScaleIn"
   autoscaling_group_name = aws_autoscaling_group.web_asg.name
   adjustment_type        = "ChangeInCapacity"
   scaling_adjustment     = -1
   cooldown               = 900
 }
 
-# Create cloud watch alarm to scale in if cpu util load is below 5%
+# Create cloud watch alarm to scale in if cpu utilization < 5%
 resource "aws_cloudwatch_metric_alarm" "scale_in_arm" {
   alarm_description   = "Monitors CPU utilization for Web ASG"
   alarm_actions       = [aws_autoscaling_policy.scale_in.arn]
-  alarm_name          = "webserver-scale-in"
+  alarm_name          = "${local.name_prefix}WebserverScaleIn"
   comparison_operator = "LessThanOrEqualToThreshold"
   namespace           = "AWS/EC2"
   metric_name         = "CPUUtilization"
@@ -97,18 +97,18 @@ resource "aws_cloudwatch_metric_alarm" "scale_in_arm" {
 
 # Create auto-scaling policy for scaling out
 resource "aws_autoscaling_policy" "scale_out" {
-  name                   = "webserver-scale-out"
+  name                   = "${local.name_prefix}WebserverScaleOut"
   autoscaling_group_name = aws_autoscaling_group.web_asg.name
   adjustment_type        = "ChangeInCapacity"
   scaling_adjustment     = 1
   cooldown               = 60
 }
 
-# Create cloud watch alarm to scale out if cpu util if the load is above 10%
+# Create cloud watch alarm to scale out if cpu utilization < 10%
 resource "aws_cloudwatch_metric_alarm" "scale_out_arm" {
   alarm_description   = "Monitors CPU utilization for Web ASG"
   alarm_actions       = [aws_autoscaling_policy.scale_out.arn]
-  alarm_name          = "webserver-scale-out"
+  alarm_name          = "${local.name_prefix}WebserverScaleOut"
   comparison_operator = "GreaterThanOrEqualToThreshold"
   namespace           = "AWS/EC2"
   metric_name         = "CPUUtilization"

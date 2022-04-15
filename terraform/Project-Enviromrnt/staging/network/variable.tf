@@ -1,7 +1,7 @@
 # Default tags
 variable "default_tags" {
   default = {
-    "Owner" = "Group-24"
+    "Owner" = "Group24"
     "App"   = "Web"
   }
 }
@@ -9,7 +9,7 @@ variable "default_tags" {
 # Prefix to identify resources
 variable "prefix" {
   type    = string
-  default = "Group-24"
+  default = "Group24"
 }
 
 # VPC CIDR range
@@ -36,7 +36,7 @@ variable "private_cidr_blocks" {
 
 # Variable to signal the current environment 
 variable "env" {
-  default     = "staging"
+  default     = "Staging"
   type        = string
   description = "Staging Environment"
 }

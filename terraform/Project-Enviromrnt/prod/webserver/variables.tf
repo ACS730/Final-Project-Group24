@@ -1,9 +1,9 @@
 # Instance type
 variable "instance_type" {
   default = {
-    "prod"    = "t3.medium"
-    "staging" = "t3.small"
-    "dev"     = "t3.micro"
+    "Prod"    = "t3.medium"
+    "Staging" = "t3.small"
+    "Dev"     = "t3.micro"
   }
   description = "Type of the instance"
   type        = map(string)
@@ -12,7 +12,7 @@ variable "instance_type" {
 # Default tags
 variable "default_tags" {
   default = {
-    "Owner" = "Group-24"
+    "Owner" = "Group24"
     "App"   = "Web"
   }
 }
@@ -26,7 +26,7 @@ variable "prefix" {
 
 # Variable to signal the current environment 
 variable "env" {
-  default     = "prod"
+  default     = "Prod"
   type        = string
   description = "Production  Environment"
 }
@@ -36,19 +36,21 @@ variable "ec2_count" {
   default = "0"
 }
 
-# Cloud9 Public IP
+# # Cloud9 Public IP
 variable "my_public_ip" {
   type        = string
   description = "Public IP of my Cloud9"
-  default     = "35.175.132.177"
+  default     = "54.211.8.202"
 }
 
 # Cloud9 Private IP
 variable "my_private_ip" {
   type        = string
   description = "Private IP of my Cloud9"
-  default     = "172.31.57.39"
+  default     = "172.31.80.34"
 }
+
+
 
 variable "desired_size" {
   type        = number

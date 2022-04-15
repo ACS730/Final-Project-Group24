@@ -23,7 +23,7 @@ resource "aws_vpc" "main" {
   instance_tenancy = "default"
   tags = merge(
     local.default_tags, {
-      Name = "${local.name_prefix}-VPC"
+      Name = "${local.name_prefix}VPC"
     }
   )
 }
@@ -37,7 +37,7 @@ resource "aws_subnet" "public_subnet" {
   availability_zone = data.aws_availability_zones.available.names[count.index]
   tags = merge(
     local.default_tags, {
-      Name = "${local.name_prefix}-Public-Subnet-${count.index}"
+      Name = "${local.name_prefix}PublicSubnet${count.index}"
     }
   )
 }
@@ -50,7 +50,7 @@ resource "aws_subnet" "private_subnet" {
   availability_zone = data.aws_availability_zones.available.names[count.index]
   tags = merge(
     local.default_tags, {
-      Name = "${local.name_prefix}-Private-Subnet-${count.index}"
+      Name = "${local.name_prefix}PrivateSubnet${count.index}"
     }
   )
 }
@@ -61,7 +61,7 @@ resource "aws_internet_gateway" "igw" {
 
   tags = merge(local.default_tags,
     {
-      "Name" = "${local.name_prefix}-IGW"
+      "Name" = "${local.name_prefix}IGW"
     }
   )
 }
@@ -74,7 +74,7 @@ resource "aws_route_table" "public_route_table" {
     gateway_id = aws_internet_gateway.igw.id
   }
   tags = {
-    Name = "${local.name_prefix}-Public-Route-Table"
+    Name = "${local.name_prefix}PublicRouteTable"
   }
 }
 
@@ -91,10 +91,9 @@ resource "aws_nat_gateway" "nat-gw" {
   subnet_id     = aws_subnet.public_subnet[0].id
 
   tags = {
-    Name = "${local.name_prefix}-NAT-GW"
+    Name = "${local.name_prefix}NATGw"
   }
-  # To ensure proper ordering, it is recommended to add an explicit dependency
-  # on the Internet Gateway for the VPC.
+
   depends_on = [aws_internet_gateway.igw]
 }
 
@@ -102,7 +101,7 @@ resource "aws_nat_gateway" "nat-gw" {
 resource "aws_eip" "nat-eip" {
   vpc   = true
   tags = {
-    Name = "${local.name_prefix}-NAT-GW"
+    Name = "${local.name_prefix}NATGw"
   }
 }
 
@@ -110,7 +109,7 @@ resource "aws_eip" "nat-eip" {
 resource "aws_route_table" "private_route_table" {
   vpc_id = aws_vpc.main.id
   tags = {
-    Name = "${local.name_prefix}-Private-Route-Table",
+    Name = "${local.name_prefix}PrivateRouteTable",
     Tier = "Private"
   }
 }

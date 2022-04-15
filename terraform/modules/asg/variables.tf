@@ -23,14 +23,14 @@ variable "env" {
   description = "Deployment Environment"
 }
 
-# Variable for list of private subnet ids for vpc_zone_identifier
+# Variable private subnet ids for vpc_zone_identifier
 variable "vpc_zone_identifier" {
   description = "A list of subnets"
   type        = list(string)
   default     = null
 }
 
-# Variable for the security groups to attach to AWS Launch Configuration
+# Variable  Launch Configuration security groups
 variable "security_groups" {
   description = "Launch Configuration Security group"
   type        = list(string)
