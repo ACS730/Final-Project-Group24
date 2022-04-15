@@ -112,7 +112,8 @@ resource "aws_security_group" "webserver_sg" {
     from_port       = 80
     to_port         = 80
     protocol        = "tcp"
-    security_groups = [aws_security_group.bastion_sg.id]
+    #security_groups = [aws_security_group.bastion_sg.id]
+    cidr_blocks     = [var.bastion_cidrs]
   }
 
   ingress {
@@ -120,8 +121,10 @@ resource "aws_security_group" "webserver_sg" {
     from_port       = 22
     to_port         = 22
     protocol        = "tcp"
-    security_groups = [aws_security_group.bastion_sg.id]
+    #security_groups = [aws_security_group.bastion_sg.id]
+    cidr_blocks     = [var.bastion_cidrs]
   }
+  
   ingress {
     description     = "HTTP from LB"
     from_port       = 80
