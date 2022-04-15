@@ -34,6 +34,10 @@ Create following S3 buckets
   
   # Deployment Guide
   
+<b>Clone Prod branch</b>
+  
+   git clone -b Prod https://github.com/ACS730/Final-Project-Group24.git
+    
 <b>Development Enviroment</b>
 
    Navigate to dev folder -> cd /Final-Project-Group24/terraform/Project-Enviromrnt/dev/network
