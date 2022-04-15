@@ -17,7 +17,7 @@ locals {
   name_prefix = "${var.prefix}-${var.env}"
 }
 
-# create load balancer
+
 resource "aws_lb" "alb" {
   name               = "${local.name_prefix}Alb"
   internal           = false
@@ -35,7 +35,7 @@ resource "aws_lb" "alb" {
   )
 }
 
-# create http listner
+
 resource "aws_lb_listener" "alb_listener" {
   load_balancer_arn = aws_lb.alb.arn
   port              = "80"
@@ -46,7 +46,7 @@ resource "aws_lb_listener" "alb_listener" {
   }
 }
 
-# create target group
+
 resource "aws_lb_target_group" "target_group" {
   health_check {
     interval            = 10
