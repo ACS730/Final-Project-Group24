@@ -34,9 +34,9 @@ Create following S3 buckets
   
   # Deployment Guide
   
-1.Development Enviroment
+<b>Development Enviroment</b>
 
-  Navigate to dev folder -> cd /Final-Project-Group24/terraform/Project-Enviromrnt/dev/network
+   Navigate to dev folder -> cd /Final-Project-Group24/terraform/Project-Enviromrnt/dev/network
   
     terraform init
     terraform fmt
@@ -45,7 +45,26 @@ Create following S3 buckets
     terraform apply --auto-approve
     
 
-  Navigate to dev folder -> cd /Final-Project-Group24/terraform/Project-Enviromrnt/dev/webserver
+   Navigate to dev folder -> cd /Final-Project-Group24/terraform/Project-Enviromrnt/dev/webserver
+  
+    terraform init
+    terraform fmt
+    terraform validate
+    terraform plan
+    terraform apply --auto-approve
+   
+ <b>Staging Enviroment</b>
+
+   Navigate to dev folder -> cd /Final-Project-Group24/terraform/Project-Enviromrnt/staging/network
+  
+    terraform init
+    terraform fmt
+    terraform validate
+    terraform plan
+    terraform apply --auto-approve
+    
+
+  Navigate to dev folder -> cd /Final-Project-Group24/terraform/Project-Enviromrnt/staging/webserver
   
     terraform init
     terraform fmt
@@ -54,5 +73,35 @@ Create following S3 buckets
     terraform apply --auto-approve
     
     
+ <b>Production Enviroment</b>
 
+   Navigate to dev folder -> cd /Final-Project-Group24/terraform/Project-Enviromrnt/prod/network
   
+    terraform init
+    terraform fmt
+    terraform validate
+    terraform plan
+    terraform apply --auto-approve
+    
+
+  Navigate to dev folder -> cd /Final-Project-Group24/terraform/Project-Enviromrnt/prod/webserver
+  
+    terraform init
+    terraform fmt
+    terraform validate
+    terraform plan
+    terraform apply --auto-approve
+    
+
+ # Authors
+ 
+  <ul>
+<li>Sneha Pillay</li>
+<li>Sneha Mudavath</li>
+<li>Arun Bains</li>
+<li>Varnika Bassi</li>
+</ul>
+ 
+# Acknowledgement
+ 
+<b>Prof. Irina Geiman for her kind guidance and timely help :-)</b>
