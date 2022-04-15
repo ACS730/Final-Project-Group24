@@ -17,11 +17,11 @@ Terraform module which creates Auto Scaling resources on AWS and Application Loa
 
 Create following S3 buckets
 
-<table><th>Command</th><th>Description</th><th>Access</th>
-   <tr><td>aws s3 mb s3://dev-acs730-final-project</td><td>To store Terraform State of development Enviroment</td><td> Private</d></tr>
-  <tr><td>aws s3 mb s3://staging-acs730-final-project</td><td>To store Terraform State of Staging Enviroment</td><td> Private</d></tr>
-   <tr><td>aws s3 mb s3://prod-acs730-final-project</td><td>To store Terraform State of production Enviroment</td><td> Private</d></tr>
-     <tr><td>aws s3 mb s3://webimg-acs730-final-project</td><td>To store web images</td><td>Public</d></tr>
+<table><th>Bucket Name</th><th>Description</th><th>Description</th><th>Access</th>
+  <tr><td>dev-acs730-final-project</td><td>To store Terraform State of development Enviroment</td><td> Private</d></tr>
+  <tr><td>staging-acs730-final-project</td><td>To store Terraform State of Staging Enviroment</td><td> Private</d></tr>
+   <tr><td>prod-acs730-final-project</td><td>To store Terraform State of production Enviroment</td><td> Private</d></tr>
+     <tr><td>acs-webimages<td>To store images for website</td><td>Public<br> Note: please make objects of S3 public by permissions -> Make Public using ACL-> Make Public<br> Permission-> ACL-> Everyone (public access) -> Read </d></tr>
    </table>
    
    Create SSH Keys
@@ -34,6 +34,10 @@ Create following S3 buckets
   
   # Deployment Guide
   
+<b>Clone Prod branch</b>
+  
+   git clone -b Prod https://github.com/ACS730/Final-Project-Group24.git
+    
 <b>Development Enviroment</b>
 
    Navigate to dev folder -> cd /Final-Project-Group24/terraform/Project-Enviromrnt/dev/network
