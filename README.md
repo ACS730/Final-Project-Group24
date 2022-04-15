@@ -1,4 +1,4 @@
-# AWS Infrastructure Deployment with Terraform 
+# Two-Tier Web application Automation with Terraform 
 
 Terraform module which creates Auto Scaling resources on AWS and Application Load Balancer resources on AWS.
 
