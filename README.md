@@ -17,16 +17,16 @@ Terraform module which creates Auto Scaling resources on AWS and Application Loa
 
 Create following S3 buckets
 
-<table><th>Command</th><th>Description</th>
-   <tr><td>aws s3 mb s3://dev-acs730-final-project</td><td>To store Terraform State of development Enviroment</td></tr>
-  <tr><td>aws s3 mb s3://staging-acs730-final-project</td><td>To store Terraform State of Staging Enviroment</td></tr>
-   <tr><td>aws s3 mb s3://prod-acs730-final-project</td><td>To store Terraform State of production Enviroment</td></tr>
-     <tr><td>aws s3 mb s3://webimg-acs730-final-project</td><td>To store web images</td></tr>
+<table><th>Command</th><th>Description</th><th>Access</th>
+   <tr><td>aws s3 mb s3://dev-acs730-final-project</td><td>To store Terraform State of development Enviroment</td><td> Private</d></tr>
+  <tr><td>aws s3 mb s3://staging-acs730-final-project</td><td>To store Terraform State of Staging Enviroment</td><td> Private</d></tr>
+   <tr><td>aws s3 mb s3://prod-acs730-final-project</td><td>To store Terraform State of production Enviroment</td><td> Private</d></tr>
+     <tr><td>aws s3 mb s3://webimg-acs730-final-project</td><td>To store web images</td><td>Public</d></tr>
    </table>
    
    Create SSH Keys
    
-   <table><th>Command </th> <th> Description  </th>
+   <table><th>Command </th> <th> Description  </th> 
   <tr><td>ssh-keygen -t rsa -f Dev-key</td><td>To generate Key-pair for staging enviroment </td></tr>
     <tr><td>ssh-keygen -t rsa -f Staging-key</td><td>To Key-pair for generate staging enviroment</td></tr>
     <tr><td>ssh-keygen -t rsa -f Prod-key</td><td>To generate Key-pair for Prod enviroment </td></tr>
@@ -104,4 +104,4 @@ Create following S3 buckets
  
 # Acknowledgement
  
-<b>Prof. Irina Geiman for her kind guidance and timely help :-)</b>
+<b>Prof. Irina Geiman for her kind guidance and timely help  &#128512;</b>
