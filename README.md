@@ -21,7 +21,9 @@ Create following S3 buckets
   <tr><td>dev-acs730-final-project</td><td>To store Terraform State of development Enviroment</td><td> Private</d></tr>
   <tr><td>staging-acs730-final-project</td><td>To store Terraform State of Staging Enviroment</td><td> Private</d></tr>
    <tr><td>prod-acs730-final-project</td><td>To store Terraform State of production Enviroment</td><td> Private</d></tr>
+
      <tr><td>acs-webimg<td>To store images for website</td><td>Public<br> Note: please make objects of S3 public by permissions -> Make Public using ACL-> Make Public<br> Permission-> ACL-> Everyone (public access) -> Read </d></tr>
+
    </table>
    
    Create SSH Keys
