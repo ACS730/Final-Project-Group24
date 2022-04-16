@@ -19,7 +19,7 @@ data "terraform_remote_state" "network" { // This is to use Outputs from Remote 
   config = {
     bucket = "prod-acs730-final-project"      // Bucket from where to GET Terraform State
     key    = "prod/network/terraform.tfstate" // Object name in the bucket to GET Terraform State
-    region = "us-east-1"                      // Region where bucket created
+    region = "us-east-1"                     // Region where bucket created
   }
 }
 
@@ -113,7 +113,7 @@ resource "aws_security_group" "webserver_sg" {
     from_port       = 80
     to_port         = 80
     protocol        = "tcp"
-    cidr_blocks     = [var.bastion_cidrs]
+    security_groups = [aws_security_group.bastion_sg.id]
   }
 
   ingress {
@@ -121,10 +121,10 @@ resource "aws_security_group" "webserver_sg" {
     from_port       = 22
     to_port         = 22
     protocol        = "tcp"
-    cidr_blocks     = [var.bastion_cidrs]
+    security_groups = [aws_security_group.bastion_sg.id]
   }
   ingress {
-    description     = "HTTP from ALB"
+    description     = "HTTP from LB"
     from_port       = 80
     to_port         = 80
     protocol        = "tcp"

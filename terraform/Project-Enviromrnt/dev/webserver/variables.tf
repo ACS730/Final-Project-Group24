@@ -56,11 +56,11 @@ variable "desired_size" {
   default     = 2
 }
 
-variable "bastion_cidrs" {
-  type        = string
-  default     = "10.200.2.0/24"
-  description = "Public IP of my Cloud 9 station to be opened in bastion ingress"
-}
+# variable "bastion_cidrs" {
+#   type        = string
+#   default     = "10.200.2.0/24"
+#   description = "Public IP of my Cloud 9 station to be opened in bastion ingress"
+# }
 
 variable "bastion_cidrs" {
   type        = string
