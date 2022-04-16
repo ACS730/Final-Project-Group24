@@ -1,7 +1,7 @@
 # Instance type
 variable "instance_type" {
   default = {
-    "Prod"    = "t3.medium"
+    "Prod"    = "t3.small"
     "Staging" = "t3.small"
     "Dev"     = "t3.micro"
   }
@@ -56,10 +56,4 @@ variable "desired_size" {
   type        = number
   description = "Desired size for ASG"
   default     = 3
-}
-
-variable "bastion_cidrs" {
-  type        = string
-  default     = "10.200.2.0/24"
-  description = "Public IP of my Cloud 9 station to be opened in bastion ingress"
 }

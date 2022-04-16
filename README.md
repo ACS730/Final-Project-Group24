@@ -21,7 +21,7 @@ Create following S3 buckets
   <tr><td>dev-acs730-final-project</td><td>To store Terraform State of development Enviroment</td><td> Private</d></tr>
   <tr><td>staging-acs730-final-project</td><td>To store Terraform State of Staging Enviroment</td><td> Private</d></tr>
    <tr><td>prod-acs730-final-project</td><td>To store Terraform State of production Enviroment</td><td> Private</d></tr>
-     <tr><td>acs-webimg<td>To store images for website</td><td>Public<br> Note: please make objects of S3 public by permissions -> Make Public using ACL-> Make Public</td></tr>
+     <tr><td>acs-webimg<td>To store images for website<br> upload "thankyou-first.jpg" file from web-img folder</td><td>Public<br> Note: please make objects of S3 public by permissions -> Make Public using ACL-> Make Public</td></tr>
    </table>
    
    Create SSH Keys
@@ -40,7 +40,7 @@ Create following S3 buckets
     
 <b>Development Enviroment</b>
 
-   Navigate to dev folder -> cd /Final-Project-Group24/terraform/Project-Enviromrnt/dev/network
+   Navigate to dev folder -> Final-Project-Group24/terraform/Project-Enviromrnt/dev/network
   
     terraform init
     terraform fmt
@@ -49,7 +49,7 @@ Create following S3 buckets
     terraform apply --auto-approve
     
 
-   Navigate to dev folder -> cd /Final-Project-Group24/terraform/Project-Enviromrnt/dev/webserver
+   Navigate to dev folder -> Final-Project-Group24/terraform/Project-Enviromrnt/dev/webserver
   
     terraform init
     terraform fmt
@@ -59,7 +59,7 @@ Create following S3 buckets
    
  <b>Staging Enviroment</b>
 
-   Navigate to dev folder -> cd /Final-Project-Group24/terraform/Project-Enviromrnt/staging/network
+   Navigate to dev folder -> Final-Project-Group24/terraform/Project-Enviromrnt/staging/network
   
     terraform init
     terraform fmt
@@ -68,7 +68,7 @@ Create following S3 buckets
     terraform apply --auto-approve
     
 
-  Navigate to dev folder -> cd /Final-Project-Group24/terraform/Project-Enviromrnt/staging/webserver
+  Navigate to dev folder -> Final-Project-Group24/terraform/Project-Enviromrnt/staging/webserver
   
     terraform init
     terraform fmt
@@ -79,7 +79,7 @@ Create following S3 buckets
     
  <b>Production Enviroment</b>
 
-   Navigate to dev folder -> cd /Final-Project-Group24/terraform/Project-Enviromrnt/prod/network
+   Navigate to dev folder -> Final-Project-Group24/terraform/Project-Enviromrnt/prod/network
   
     terraform init
     terraform fmt
@@ -88,7 +88,7 @@ Create following S3 buckets
     terraform apply --auto-approve
     
 
-  Navigate to dev folder -> cd /Final-Project-Group24/terraform/Project-Enviromrnt/prod/webserver
+  Navigate to dev folder -> Final-Project-Group24/terraform/Project-Enviromrnt/prod/webserver
   
     terraform init
     terraform fmt

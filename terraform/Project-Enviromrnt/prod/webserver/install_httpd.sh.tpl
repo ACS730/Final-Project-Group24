@@ -27,7 +27,7 @@ cat > /var/www/html/index.html <<EOL
       </div>
       <div class="row">
         <div class="col-md-6 text-center">
-         <img src="https://acs-webimg.s3.amazonaws.com/thankyou-first.jpg" width="400" height="400" alt="..." class="img-rounded">
+         <img src="https://acs-webimages.s3.amazonaws.com/thankyou-first.jpg" width="400" height="400" alt="..." class="img-rounded">
         </div>
       
       

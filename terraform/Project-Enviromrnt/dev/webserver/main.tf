@@ -108,23 +108,23 @@ resource "aws_security_group" "webserver_sg" {
   vpc_id      = data.terraform_remote_state.network.outputs.vpc_id
 
   ingress {
-    description     = "HTTP from Bastion"
-    from_port       = 80
-    to_port         = 80
-    protocol        = "tcp"
+    description = "HTTP from Bastion"
+    from_port   = 80
+    to_port     = 80
+    protocol    = "tcp"
     #security_groups = [aws_security_group.bastion_sg.id]
-    cidr_blocks     = [var.bastion_cidrs]
+    cidr_blocks = [var.bastion_cidrs]
   }
 
   ingress {
-    description     = "SSH from Bastion"
-    from_port       = 22
-    to_port         = 22
-    protocol        = "tcp"
+    description = "SSH from Bastion"
+    from_port   = 22
+    to_port     = 22
+    protocol    = "tcp"
     #security_groups = [aws_security_group.bastion_sg.id]
-    cidr_blocks     = [var.bastion_cidrs]
+    cidr_blocks = [var.bastion_cidrs]
   }
-  
+
   ingress {
     description     = "HTTP from LB"
     from_port       = 80
